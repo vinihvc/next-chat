@@ -11,7 +11,7 @@ export const Container = ({
 }: ContainerProps) => {
   return (
     <div
-      className={clsx('container mx-auto px-4 md:px-6 w-full', className)}
+      className={clsx('container mx-auto w-full px-4 md:px-6', className)}
       {...props}
     >
       {children}

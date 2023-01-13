@@ -23,18 +23,18 @@ export const Chat = ({ messages, ...props }: ChatProps) => {
   }, [messages])
 
   return (
-    <div className="h-[20rem] w-full shadow-xl" {...props}>
+    <div className='h-[20rem] w-full shadow-xl' {...props}>
       <div
         ref={wrapper}
-        className="h-full w-full overflow-y-scroll overflow-x-hidden bg-chat p-2"
+        className='h-full w-full overflow-x-hidden overflow-y-scroll bg-chat p-2'
       >
         {messages.map((msg, i) => (
-          <div className="flex gap-2 text-white w-full py-1 px-2" key={i}>
-            <span className="font-medium" style={{ color }}>
+          <div className='flex w-full gap-2 py-1 px-2 text-white' key={i}>
+            <span className='font-medium' style={{ color }}>
               {msg.author}:
             </span>
 
-            <span className="font-sm break-all">{msg.message}</span>
+            <span className='break-all text-sm'>{msg.message}</span>
           </div>
         ))}
       </div>

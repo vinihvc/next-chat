@@ -10,7 +10,7 @@ export const Button = ({
   return (
     <button
       type={type}
-      className="h-[40px] font-bold bg-violet-600 text-white px-4 tracking-wide hover:bg-violet-700 duration-200"
+      className='h-[40px] bg-violet-600 px-4 font-bold tracking-wide text-white duration-200 hover:bg-violet-700'
       {...props}
     >
       {children}

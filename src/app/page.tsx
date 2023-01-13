@@ -31,16 +31,16 @@ const RootPage = () => {
       <Chat messages={messages} />
 
       <form
-        className="w-full flex shadow-xl mt-5 space-x-2"
+        className='mt-5 flex w-full space-x-2 shadow-xl'
         onSubmit={handleSubmit}
       >
         <Input
-          placeholder="New message..."
+          placeholder='New message...'
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
 
-        <Button type="submit">Send</Button>
+        <Button type='submit'>Send</Button>
       </form>
     </Container>
   )

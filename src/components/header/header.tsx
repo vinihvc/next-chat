@@ -7,15 +7,15 @@ type HeaderProps = React.HTMLAttributes<HTMLDivElement>
 export const Header = (props: HeaderProps) => {
   return (
     <header
-      className="h-[70px] flex flex-col justify-center bg-header"
+      className='flex h-[70px] flex-col justify-center bg-header'
       {...props}
     >
       <Container>
-        <nav className="flex items-center justify-between flex-wrap">
-          <span className="flex space-x-2 items-center select-none">
+        <nav className='flex flex-wrap items-center justify-between'>
+          <span className='flex select-none items-center space-x-2'>
             <ChatIcon />
 
-            <span className="font-bold text-xl tracking-wide">
+            <span className='text-xl font-bold tracking-wide'>
               Next Messenger
             </span>
           </span>

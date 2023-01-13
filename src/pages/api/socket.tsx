@@ -2,7 +2,7 @@ import { Server } from 'socket.io'
 
 import { messageHandler } from '@/services/socket'
 
-export default function SocketHandler(req: any, res: any) {
+export default function SocketHandler(req, res) {
   if (res.socket.server.io) {
     res.end()
     return

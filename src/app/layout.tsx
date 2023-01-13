@@ -16,15 +16,15 @@ type LayoutProps = {
 
 const RootLayout = ({ children }: LayoutProps) => {
   return (
-    <html lang="en" className={clsx('bg-bg text-white', globalFont.className)}>
+    <html lang='en' className={clsx('bg-bg text-white', globalFont.className)}>
       <head>
         <title>Next Messenger</title>
       </head>
 
-      <body className="min-h-screen flex flex-col">
+      <body className='flex min-h-screen flex-col'>
         <Header />
 
-        <main className="flex justify-center items-center flex-1">
+        <main className='flex flex-1 items-center justify-center'>
           {children}
         </main>
       </body>
