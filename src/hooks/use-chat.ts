@@ -53,7 +53,7 @@ export const useChat = () => {
 
   return {
     chat,
-    connected: true,
+    connected,
     sendMessage,
     sending,
   }
