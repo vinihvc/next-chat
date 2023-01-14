@@ -7,7 +7,7 @@ module.exports = {
       colors: {
         bg: '#1d1e24',
         input: '#16171b',
-        header: '#20232b',
+        header: '#181920',
         chat: '#20232b',
       },
     },

@@ -14,7 +14,7 @@ export const Button = ({
     <button
       type={type}
       className={clsx(
-        'flex h-[40px] items-center justify-center bg-violet-600 px-4 font-bold tracking-wide duration-200 hover:bg-violet-700',
+        'flex h-[40px] items-center justify-center bg-violet-600 px-4 font-bold tracking-wide outline-none duration-200  hover:bg-violet-700 disabled:cursor-not-allowed disabled:opacity-50',
         className,
       )}
       {...props}
