@@ -1,4 +1,5 @@
-export type Message = {
-  author: string
+export type IMessage = {
+  user: string
   message: string
+  color: string
 }

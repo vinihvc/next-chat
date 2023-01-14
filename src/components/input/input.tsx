@@ -4,7 +4,7 @@ export const Input = ({ type, ...props }: InputProps) => {
   return (
     <input
       type={type}
-      className='h-[40px] flex-1 bg-input px-2 text-white outline-none'
+      className='h-[40px] w-full flex-1 rounded-full bg-input px-4 outline-none'
       {...props}
     />
   )

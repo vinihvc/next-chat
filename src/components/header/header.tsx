@@ -7,7 +7,7 @@ type HeaderProps = React.HTMLAttributes<HTMLDivElement>
 export const Header = (props: HeaderProps) => {
   return (
     <header
-      className='flex h-[70px] flex-col justify-center bg-header'
+      className='sticky top-0 flex h-[70px] flex-col justify-center bg-header shadow-sm'
       {...props}
     >
       <Container>

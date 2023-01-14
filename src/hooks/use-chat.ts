@@ -1,40 +1,53 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
+import SocketClient from 'socket.io-client'
+
+import { IMessage } from '@/models/message'
 import { useAtom } from 'jotai'
+import { userAtom } from '@/store/user'
+import { postMessage } from '@/services/requests/message'
 
-import { Message } from '@/models/message'
+export const useChat = () => {
+  const [user] = useAtom(userAtom)
 
-import { socketAtom } from '@/store/socket'
+  const [connected, setConnected] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [chat, setChat] = useState<IMessage[]>([])
 
-import { useEffectOnce } from '@/hooks/use-effect-once'
-
-export const useChat = (username: string) => {
-  const [messages, setMessages] = useState<Array<Message>>([])
-
-  const [socket] = useAtom(socketAtom)
-
-  useEffectOnce(() => {
-    socketInitializer()
-  })
-
-  const socketInitializer = async () => {
-    if (!socket) return
-
-    await fetch('/api/socket')
-
-    socket.on('newIncomingMessage', ({ author, message }: Message) => {
-      setMessages((e) => [...e, { author, message }])
+  useEffect(() => {
+    const socket = SocketClient.connect(process.env.BASE_URL, {
+      path: '/api/socket',
     })
-  }
+
+    socket.on('connect', () => {
+      setConnected(true)
+    })
+
+    socket.on('message', (message: IMessage) => {
+      setChat((e) => [...e, message])
+    })
+
+    if (socket) return () => socket.disconnect()
+  }, [])
 
   const sendMessage = async (message: string) => {
-    socket.emit('createdMessage', { author: username, message })
+    if (sending) return
 
-    setMessages((currentMsg) => [...currentMsg, { author: username, message }])
+    try {
+      setSending(true)
+
+      await postMessage({ user: user.name, message, color: user.color })
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setSending(false)
+    }
   }
 
   return {
-    messages,
+    chat,
+    connected,
     sendMessage,
+    sending,
   }
 }

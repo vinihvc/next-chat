@@ -9,7 +9,14 @@
     "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
     "start": "next start",
-    "prettier": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}'"
+    "prettier": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}'",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "src/**/*": [
+      "pnpm run lint:fix",
+      "pnpm run prettier"
+    ]
   },
   "dependencies": {
     "@next/font": "^13.1.1",
@@ -33,6 +40,8 @@
     "eslint-plugin-react": "^7.32.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-tailwindcss": "^3.8.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
     "postcss": "^8.4.21",
     "postcss-import": "^15.1.0",
     "prettier": "^2.8.2",

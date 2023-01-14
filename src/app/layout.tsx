@@ -1,4 +1,4 @@
-import { Nunito_Sans } from '@next/font/google'
+import { Josefin_Sans } from '@next/font/google'
 
 import { Header } from '@/components/header'
 
@@ -6,9 +6,7 @@ import { clsx } from '@/utils/classname'
 
 import '@/styles/globals.css'
 
-const globalFont = Nunito_Sans({
-  weight: ['300', '400', '600', '700'],
-})
+const globalFont = Josefin_Sans()
 
 type LayoutProps = {
   children: React.ReactNode
@@ -24,7 +22,7 @@ const RootLayout = ({ children }: LayoutProps) => {
       <body className='flex min-h-screen flex-col'>
         <Header />
 
-        <main className='flex flex-1 items-center justify-center'>
+        <main className='flex max-h-max flex-1 flex-col items-center justify-center'>
           {children}
         </main>
       </body>

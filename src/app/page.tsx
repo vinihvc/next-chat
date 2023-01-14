@@ -1,48 +1,55 @@
 'use client'
 
-import { useState, useRef, FormEvent } from 'react'
+import React, { FormEvent, useState } from 'react'
 
 import { useChat } from '@/hooks/use-chat'
 
 import { Button } from '@/components/button'
-import { Container } from '@/components/container'
 import { Input } from '@/components/input'
 import { Chat } from '@/components/chat'
+import { Container } from '@/components/container'
+
+import { SendIcon } from '@/libs/icons/send'
 
 const RootPage = () => {
+  const { chat, connected, sendMessage, sending } = useChat()
   const [message, setMessage] = useState('')
-
-  const username = useRef(`Anonymous${Math.floor(Math.random() * 1000)}`)
-
-  const { messages, sendMessage } = useChat(username.current)
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
 
-    if (message === '') return
+    if (!message) return
 
     sendMessage(message)
-
     setMessage('')
   }
 
   return (
-    <Container>
-      <Chat messages={messages} />
+    <>
+      <Chat className='md:mt-5' messages={chat} />
 
       <form
-        className='mt-5 flex w-full space-x-2 shadow-xl'
+        className='sticky bottom-0 h-full w-full py-5'
         onSubmit={handleSubmit}
       >
-        <Input
-          placeholder='New message...'
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
+        <Container className='flex space-x-4'>
+          <Input
+            value={message}
+            placeholder={connected ? 'Type a message...' : 'Connecting...'}
+            disabled={!connected}
+            onChange={(e) => setMessage(e.target.value)}
+          />
 
-        <Button type='submit'>Send</Button>
+          <Button
+            type='submit'
+            className='w-[40px] rounded-full px-0'
+            disabled={!connected || sending}
+          >
+            <SendIcon className='h-5 w-5' />
+          </Button>
+        </Container>
       </form>
-    </Container>
+    </>
   )
 }
 

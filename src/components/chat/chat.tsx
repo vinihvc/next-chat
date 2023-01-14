@@ -1,19 +1,20 @@
 import { useEffect, useRef } from 'react'
 
-import { Message } from '@/models/message'
+import { IMessage } from '@/models/message'
 
-import { useConst } from '@/hooks/use-const'
+import { Container } from '@/components/container'
+import { Message, MessageEmpty } from '@/components/message'
 
-import { generateRandomColor } from '@/utils/color'
+import { clsx } from '@/utils/classname'
 
 type ChatProps = {
-  messages: Array<Message>
+  messages: Array<IMessage>
 } & React.HTMLAttributes<HTMLDivElement>
 
-export const Chat = ({ messages, ...props }: ChatProps) => {
-  const color = useConst(generateRandomColor)
-
+export const Chat = ({ messages, className, ...props }: ChatProps) => {
   const wrapper = useRef<HTMLDivElement>(null)
+
+  const isEmpty = messages.length === 0
 
   // Scroll to bottom when new message is added
   useEffect(() => {
@@ -23,21 +24,24 @@ export const Chat = ({ messages, ...props }: ChatProps) => {
   }, [messages])
 
   return (
-    <div className='h-[20rem] w-full shadow-xl' {...props}>
+    <Container
+      className={clsx('flex h-full flex-1 flex-col px-0', className)}
+      {...props}
+    >
       <div
+        className='flex h-full flex-1 flex-col rounded-lg bg-chat p-4 shadow-lg'
         ref={wrapper}
-        className='h-full w-full overflow-x-hidden overflow-y-scroll bg-chat p-2'
       >
-        {messages.map((msg, i) => (
-          <div className='flex w-full gap-2 py-1 px-2 text-white' key={i}>
-            <span className='font-medium' style={{ color }}>
-              {msg.author}:
-            </span>
-
-            <span className='break-all text-sm'>{msg.message}</span>
+        {isEmpty && (
+          // align to center
+          <div className='flex h-full flex-1 items-center justify-center'>
+            <MessageEmpty />
           </div>
-        ))}
+        )}
+
+        {!isEmpty &&
+          messages.map((msg, i) => <Message key={i} message={msg} />)}
       </div>
-    </div>
+    </Container>
   )
 }
