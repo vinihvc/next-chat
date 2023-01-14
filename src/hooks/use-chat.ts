@@ -15,6 +15,8 @@ export const useChat = () => {
   const [chat, setChat] = useState<IMessage[]>([])
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const socket = SocketClient.connect(process.env.BASE_URL, {
       path: '/api/socket',
     })
