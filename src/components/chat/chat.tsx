@@ -33,7 +33,6 @@ export const Chat = ({ messages, className, ...props }: ChatProps) => {
         ref={wrapper}
       >
         {isEmpty && (
-          // align to center
           <div className='flex h-full flex-1 items-center justify-center'>
             <MessageEmpty />
           </div>

@@ -1,10 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import SocketClient from 'socket.io-client'
 
-import { IMessage } from '@/models/message'
 import { useAtom } from 'jotai'
+
+import { IMessage } from '@/models/message'
+
 import { userAtom } from '@/store/user'
+
+import { useEffectOnce } from '@/hooks/use-effect-once'
+
 import { postMessage } from '@/services/requests/message'
 
 export const useChat = () => {
@@ -14,7 +19,7 @@ export const useChat = () => {
   const [sending, setSending] = useState(false)
   const [chat, setChat] = useState<IMessage[]>([])
 
-  useEffect(() => {
+  useEffectOnce(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const socket = SocketClient.connect(process.env.BASE_URL, {
@@ -30,7 +35,7 @@ export const useChat = () => {
     })
 
     if (socket) return () => socket.disconnect()
-  }, [])
+  })
 
   const sendMessage = async (message: string) => {
     if (sending) return

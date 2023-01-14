@@ -9,8 +9,6 @@ import { Input } from '@/components/input'
 import { Chat } from '@/components/chat'
 import { Container } from '@/components/container'
 
-import { SendIcon } from '@/libs/icons/send'
-
 const RootPage = () => {
   const { chat, connected, sendMessage, sending } = useChat()
   const [message, setMessage] = useState('')
@@ -45,7 +43,7 @@ const RootPage = () => {
             className='w-[40px] rounded-full px-0'
             disabled={!connected || sending}
           >
-            <SendIcon className='h-5 w-5' />
+            {'>'}
           </Button>
         </Container>
       </form>
